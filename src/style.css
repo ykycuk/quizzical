@@ -1,0 +1,182 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+button:focus {
+  outline: none;
+}
+
+.startPage,
+.secondPage {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.startPage h1,
+.startPage p {
+  color: #293264;
+}
+.startPage h1 {
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+.startPage p {
+  font-weight: 400;
+  margin: 0.8rem 0 1.5rem 0;
+}
+
+.startPage--btn {
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 15px;
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  padding: 16px 60px;
+  cursor: pointer;
+}
+
+.startPage--btn:active,
+.secondPage--btn:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+.startPage--imgBlue,
+.startPage--imgYellow {
+  position: relative;
+}
+
+.startPage--imgYellow {
+  margin-left: auto;
+  margin-bottom: auto;
+  bottom: 130px;
+  left: 100px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.startPage--imgBlue {
+  margin-right: auto;
+  margin-top: auto; 
+  top: 110px;
+  right: 140px;
+}
+
+.secondPage--block {
+  width: 400px;
+  display: grid;
+  grid-template-areas: 
+    "question question question question question"
+    "first   second   third   fourth .";
+  grid-template-columns: repeat(5, auto);
+  grid-gap: 0 13px;
+  border-bottom: 2px solid #DBDEF0;
+  margin-bottom: 14px;
+}
+
+.secondPage--question {
+  grid-area: question;
+  font-family: 'Karla';
+  font-style: normal;
+  color: #293264;
+  margin: 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.secondPage--answer {
+  font-weight: 500;
+  font-size: 10.24px;
+  color: #293264;
+  border: 1px solid #4D5B9E;
+  border-radius: 8px;
+  line-height: 12px;
+  text-align: center;
+  width: fit-content;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.secondPage--answer:hover {
+  background-color: #FFFAD1;
+}
+
+.first {
+  grid-area: first;
+}
+
+.second {
+  grid-area: second;
+}
+
+.third {
+  grid-area: third;
+}
+
+.fourth {
+  grid-area: fourth;
+}
+
+.secondPage--scoredBtn {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+.secondPage--scored {
+  margin: auto;
+  margin-right: 20px;
+  color: #293264;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12.8px;
+  line-height: 15px;
+}
+.secondPage--btn {
+  margin: auto;
+  font-weight: 600;
+  font-size: 10.24px;
+  border: none;
+  border-radius: 15px;
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  padding: 11px 22px;
+  cursor: pointer;
+}
+
+.secondPage--imgBlue,
+.secondPage--imgYellow {
+  position: relative;
+}
+
+.secondPage--imgYellow {
+  margin-left: auto;
+  margin-bottom: auto;
+  bottom: 90px;
+  left: 100px;
+}
+
+.secondPage--imgBlue {
+  margin-right: auto;
+  margin-top: auto; 
+  top: 90px;
+  right: 180px;
+}
+
+
+
+
