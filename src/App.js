@@ -69,7 +69,7 @@ function App() {
        (id > 4 && id <= 8 && !answersSelection.selection2) ||
        (id > 8 && id <= 12 && !answersSelection.selection3) ||
        (id > 12 && id <= 16 && !answersSelection.selection4) ||
-       (id > 16 && id <= 29 && !answersSelection.selection5)) {
+       (id > 16 && id <= 20 && !answersSelection.selection5)) {
       setAnswersSelection(prevState => {
         if(id <= 4 && !answersSelection.selection1) {
           return {...prevState, selection1: !prevState.selection1}
