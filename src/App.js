@@ -1,16 +1,15 @@
 import React from 'react';
-import ImgBlubBlue from './img/blob_blue.png';
-import ImgBlubYellow from './img/blob_yellow.png';
 import { data } from "./data";
 import Answer from './components/Answer';
-import Question from './components/Question';
+import MainPage from './components/MainPage';
+import StartPage from './components/StartPage';
 
 function App() {
   const [game, setGame] = React.useState(false)
   const [newGame, setNewGame] = React.useState(false)
   const [answers, setAnswers] = React.useState(data)
   const [giveCorrectAnswers, setGiveCorrectAnswers] = React.useState(false)
-  const [answersSelection, setAnswersSelection] = React.useState({ //for one right answer on question
+  const [answersSelection, setAnswersSelection] = React.useState({
     selection1: false,
     selection2: false,
     selection3: false,
@@ -51,18 +50,36 @@ function App() {
     setNewGame(prev => !prev)
   }
 
-  // function setUserAnswers(id) {
-  //   setAnswers(prevAnswers => prevAnswers.map(
-  //     answer => {
-  //       if(answer.id === id && !answer.isHeld) {
-  //           return {...answer, isHeld: !answer.isHeld}
-  //       } else if(answer.id > 0 && answer.id <= 4) {
-  //           return {...answer, isHeld: false}
-  //       } else 
-  //           return answer
-  //     }
-  //   ))
-  // }
+  function addUserAnswers(id) {
+    let startNumber
+    let endNumber
+    if(id > 0 && id <= 4) {
+      startNumber = 0
+      endNumber = 4
+    } else if (id > 4 && id <= 8) {
+      startNumber = 4
+      endNumber = 8
+    } else if (id > 8 && id <= 12) {
+      startNumber = 8
+      endNumber = 12
+    } else if (id > 12 && id <= 16) {
+      startNumber = 12
+      endNumber = 16
+    } else {
+      startNumber = 16
+      endNumber = 20
+    }
+    setAnswers(prevAnswers => prevAnswers.map(
+      answer => {
+        if(answer.id === id && !answer.isHeld) {
+            return {...answer, isHeld: !answer.isHeld}
+        } else if(answer.id > startNumber && answer.id <= endNumber) {
+            return {...answer, isHeld: false}
+        } else 
+            return answer
+      }
+    ))
+  }
 
   function chooseAnswer(id) {
     if((id <= 4 && !answersSelection.selection1) ||
@@ -90,61 +107,15 @@ function App() {
           answer
       ))
     } else if(id <= 4 && answersSelection.selection1) {
-      setAnswers(prevAnswers => prevAnswers.map(
-        answer => {
-          if(answer.id === id && !answer.isHeld) {
-              return {...answer, isHeld: !answer.isHeld}
-          } else if(answer.id <= 4) {
-              return {...answer, isHeld: false}
-          } else 
-              return answer
-        }
-      ))
-      // setUserAnswers(id)
+      addUserAnswers(id)
     } else if(id > 4 && id <= 8 && answersSelection.selection2) {
-      setAnswers(prevAnswers => prevAnswers.map(
-        answer => {
-          if(answer.id === id && !answer.isHeld) {
-              return {...answer, isHeld: !answer.isHeld}
-          } else if(answer.id > 4 && answer.id <= 8) {
-              return {...answer, isHeld: false}
-          } else 
-              return answer
-        }
-      ))
+      addUserAnswers(id)
     } else if(id > 8 && id <= 12 && answersSelection.selection3) {
-      setAnswers(prevAnswers => prevAnswers.map(
-        answer => {
-          if(answer.id === id && !answer.isHeld) {
-              return {...answer, isHeld: !answer.isHeld}
-          } else if(answer.id > 8 && answer.id <= 12) {
-              return {...answer, isHeld: false}
-          } else 
-              return answer
-        }
-      ))
+      addUserAnswers(id)
     } else if(id > 12 && id <= 16 && answersSelection.selection4) {
-      setAnswers(prevAnswers => prevAnswers.map(
-        answer => {
-          if(answer.id === id && !answer.isHeld) {
-              return {...answer, isHeld: !answer.isHeld}
-          } else if(answer.id > 12 && answer.id <= 16) {
-              return {...answer, isHeld: false}
-          } else 
-              return answer
-        }
-      ))
+      addUserAnswers(id)
     } else if(id > 16 && id <= 20 && answersSelection.selection5) {
-      setAnswers(prevAnswers => prevAnswers.map(
-        answer => {
-          if(answer.id === id && !answer.isHeld) {
-              return {...answer, isHeld: !answer.isHeld}
-          } else if(answer.id > 16 && answer.id <= 20) {
-              return {...answer, isHeld: false}
-          } else 
-              return answer
-        }
-      ))
+      addUserAnswers(id)
     }
   }
 
@@ -162,7 +133,7 @@ function App() {
       />
   ))
 
-  function displayAnswers(amount, giveCorrectAnswers) {
+  function displayAnswers(amount) {
     const arr = []
     for(let i = amount - 4; i < amount; i++) {
       arr.push(answersArr[i])
@@ -175,47 +146,17 @@ function App() {
           {
             game
             ? 
-            <section className='secondPage'>
-              <img className='secondPage--imgYellow' src={ImgBlubYellow} alt="yellow"/>
-              <div className='secondPage--block'>
-                <Question value="How would one say goodbye in Spanish?"/>
-                {displayAnswers(4)}
-              </div>
-              <div className='secondPage--block'>
-                <Question value="Which best selling toy of 1983 caused hysteria, resulting in riots breaking in stores?"/>
-                {displayAnswers(8)}
-              </div>
-              <div className='secondPage--block'>
-                <Question value="What is the hottest planet in our Solar System?"/>
-                {displayAnswers(12)}
-              </div>
-              <div className='secondPage--block'>
-                <Question value="In which country was the caesar salad invented?"/>
-                {displayAnswers(16)}
-              </div>
-              <div className='secondPage--block'>
-                <Question value="How Many Hearts Does An Octopus Have?"/>
-                {displayAnswers(20)}
-              </div>
-              {newGame ?
-              <div className='secondPage--scoredBtn'>             
-                <p className='secondPage--scored'>You scored {rightAnswersCount()}/5 correct answers</p>
-                <button className='secondPage--btn' onClick={playAgain}>Play again</button> 
-              </div>
-
-              :
-              <button className='secondPage--btn' onClick={checkAnswers}>Check answers</button>
-              }
-              <img className='secondPage--imgBlue' src={ImgBlubBlue} alt="blue"/>
-            </section> 
+            <MainPage 
+              displayAnswers={displayAnswers}
+              newGame={newGame}
+              rightAnswersCount={rightAnswersCount()}
+              playAgain={playAgain}
+              checkAnswers={checkAnswers}
+            />
             :
-            <section className='startPage'>
-              <img className='startPage--imgYellow' src={ImgBlubYellow} alt="yellow"/>
-              <h1>Quizzical</h1>
-              <p>Check your knowladge</p>
-              <button className='startPage--btn' onClick={start}>Start quiz</button>
-              <img className='startPage--imgBlue' src={ImgBlubBlue} alt="blue"/>
-            </section>
+            <StartPage 
+              start={start}
+            />
           }
         </main>
   );
